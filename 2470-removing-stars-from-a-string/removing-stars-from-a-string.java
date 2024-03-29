@@ -3,7 +3,7 @@ import java.util.Stack;
 class Solution {
     public String removeStars(String s) {
         Stack<Character> stack = new Stack<>();
-        StringBuilder strBuilder = new StringBuilder();
+        StringBuilder str = new StringBuilder();
 
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) != '*') {
@@ -16,9 +16,9 @@ class Solution {
         }
 
         while (!stack.isEmpty()) {
-            strBuilder.insert(0, stack.pop());
+            str.insert(0, stack.pop());
         }
 
-        return strBuilder.toString();
+        return str.toString();
     }
 }
