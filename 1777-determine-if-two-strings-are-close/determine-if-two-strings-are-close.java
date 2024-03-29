@@ -3,21 +3,26 @@ class Solution {
         if (word1.length()!=word2.length()){
             return false;
         }
-        Map<Character,Integer> word1Map=new HashMap<>();
-        Map<Character,Integer> word2Map=new HashMap<>();
+        int word1f[]=new int[26];
+        int word2f[]=new int[26];
         for (char c:word1.toCharArray()){
-            word1Map.put(c,word1Map.getOrDefault(c,0)+1);
+            word1f[c-'a']++;
         }
         for (char c:word2.toCharArray()){
-            word2Map.put(c,word2Map.getOrDefault(c,0)+1);
+            word2f[c-'a']++;
         }
-        if (!word1Map.keySet().equals(word2Map.keySet())){
-            return false;
+        for (int i=0;i<26;i++){
+            if (word1f[i]==0&&word2f[i]!=0){
+                return false;
+            }
         }
-        ArrayList<Integer> word1Frequency=new ArrayList<>(word1Map.values());
-        ArrayList<Integer> word2Frequency=new ArrayList<>(word2Map.values());
-        Collections.sort(word1Frequency);
-        Collections.sort(word2Frequency);
-        return word1Frequency.equals(word2Frequency);
+        Arrays.sort(word1f);
+        Arrays.sort(word2f);
+        for (int i=0;i<26;i++){
+            if (word1f[i]!=word2f[i]){
+                return false;
+            }
+        }
+        return true;
     }
 }
