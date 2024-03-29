@@ -1,10 +1,10 @@
 class Solution {
     public int longestSubarray(int[] nums) {
-        int longest = 0;
-        int zeroCount = 0;
-        int start = 0;
+        int longest=0;
+        int zeroCount=0;
+        int start=0;
         
-        for (int j = 0; j < nums.length; j++) {
+        for (int j=0; j<nums.length; j++) {
             if (nums[j] == 0) {
                 zeroCount++;
             }
