@@ -1,5 +1,5 @@
 class Solution {
-    public int tabulation(int n, int m, String s1, String s2) {
+    public int helper(int n, int m, String s1, String s2) {
         int[][] dp = new int[n + 1][m + 1];
         
         for (int j = 0; j <= m; j++) {
@@ -25,6 +25,6 @@ class Solution {
     public int longestCommonSubsequence(String s1, String s2) {
         int n = s1.length();
         int m = s2.length();
-        return tabulation(n, m, s1, s2);
+        return helper(n, m, s1, s2);
     }
 }
