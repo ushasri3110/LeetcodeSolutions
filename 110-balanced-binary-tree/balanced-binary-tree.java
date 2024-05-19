@@ -18,9 +18,7 @@ class Solution {
         if (root==null){
             return 0;
         }
-        int leftHeight=height(root.left);
-        int rightHeight=height(root.right);
-        return 1+Math.max(leftHeight,rightHeight);
+        return 1+Math.max(height(root.left),height(root.right));
     }
     public boolean isBalanced(TreeNode root) {
         if (root==null){
