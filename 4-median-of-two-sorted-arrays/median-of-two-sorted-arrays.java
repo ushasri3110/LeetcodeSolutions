@@ -17,7 +17,7 @@ class Solution {
             int minY = partitionY == n ? Integer.MAX_VALUE : nums2[partitionY];
             if (maxX <= minY && maxY <= minX) {
                 if ((m + n) % 2 == 0) {
-                    median = ((double)Math.max(maxX, maxY) + (double)Math.min(minX, minY)) / 2;
+                    median = (Math.max(maxX, maxY) + Math.min(minX, minY)) / 2.0;
                     return median;
                 } else {
                     median = Math.max(maxX, maxY);
