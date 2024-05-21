@@ -1,37 +1,26 @@
 class Solution {
     public String longestPalindrome(String s) {
-        if (s == null || s.length() < 1) {
-            return "";
+        if(s.length()<=0){
+            return null;
         }
-        String longest_palindrome = "";
-        for (int i = 0; i < s.length(); i++) {
-            int low = i;
-            int high = i;
-            while (s.charAt(low) == s.charAt(high)) {
-                low--;
-                high++;
-                if (low == -1 || high == s.length()) {
-                    break;
-                }
+        String longestPalindrome="";
+        for(int i=0;i<s.length();i++){
+            String oddPalindrome=longestPalindromeHelper(s,i,i);
+            if(oddPalindrome.length()>longestPalindrome.length()){
+                longestPalindrome=oddPalindrome;
             }
-            String current_palindrome = s.substring(low + 1, high);
-            if (longest_palindrome.length() < current_palindrome.length()) {
-                longest_palindrome = current_palindrome;
-            }
-            low = i - 1;
-            high = i;
-            while (low>=0&&s.charAt(low) == s.charAt(high)) {
-                low--;
-                high++;
-                if (low == -1 || high == s.length()) {
-                    break;
-                }
-            }
-            current_palindrome = s.substring(low + 1, high);
-            if (longest_palindrome.length() < current_palindrome.length()) {
-                longest_palindrome = current_palindrome;
+            String evenPalindrome=longestPalindromeHelper(s,i-1,i);
+            if (evenPalindrome.length()>longestPalindrome.length()){
+                longestPalindrome=evenPalindrome;
             }
         }
-        return longest_palindrome;
+        return longestPalindrome;
+    }
+    public String longestPalindromeHelper(String s,int start,int end){
+        while(start>=0&&end<s.length()&&s.charAt(start)==s.charAt(end)){
+            start--;
+            end++;
+        }
+        return s.substring(start+1,end);
     }
 }
