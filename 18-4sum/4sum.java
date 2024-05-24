@@ -19,6 +19,12 @@ class Solution {
                         if (!result.contains(list)) {
                             result.add(list);
                         }
+                        while (left<right && nums[left]==nums[left+1]){
+                            left++;
+                        }
+                        while (left<right && nums[right]==nums[right-1]){
+                            right--;
+                        }
                         left++;
                         right--;
                     } else if (sum > target) {
