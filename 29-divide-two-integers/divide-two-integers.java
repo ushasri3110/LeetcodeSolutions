@@ -7,9 +7,9 @@ class Solution {
         long a=Math.abs((long)dividend);
         long b=Math.abs((long)divisor);
         int result=0;
-        while (a-b>=0){
+        while (a>=b){
             int count=0;
-            while (a-(b<<count+1)>=0){
+            while (a>=(b<<count+1)){
                 count++;
             }
             result+=1<<count;
