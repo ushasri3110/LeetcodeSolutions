@@ -17,8 +17,8 @@ class Solution {
                 break;
             }
             int digit=c-'0';
-            if (num>(Integer.MAX_VALUE-digit)/10){
-                return isNegative?Integer.MIN_VALUE:Integer.MAX_VALUE;
+             if (num > Integer.MAX_VALUE / 10 || (num == Integer.MAX_VALUE / 10 && digit > Integer.MAX_VALUE % 10)) {
+                return isNegative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
             }
             num=num*10+digit;
             index++;
