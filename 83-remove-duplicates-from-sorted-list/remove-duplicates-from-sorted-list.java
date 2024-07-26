@@ -16,7 +16,8 @@ class Solution {
            {
              temp.next=temp.next.next;
            }
-           else{
+           else
+           {
             temp=temp.next;
            }
         }
