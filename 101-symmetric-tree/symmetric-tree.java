@@ -27,6 +27,9 @@ class Solution {
         if (leftNode==null || rightNode==null){
             return false;
         }
-        return leftNode.val==rightNode.val && isSymmetricHelper(leftNode.left,rightNode.right)&& isSymmetricHelper(leftNode.right,rightNode.left);
+        if (leftNode.val!=rightNode.val){
+            return false;
+        }
+        return isSymmetricHelper(leftNode.left,rightNode.right)&&isSymmetricHelper(leftNode.right,rightNode.left);
     }
 }
