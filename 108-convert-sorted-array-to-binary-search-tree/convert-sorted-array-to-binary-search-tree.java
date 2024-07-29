@@ -18,16 +18,16 @@ class Solution {
         if (nums.length==0){
             return null;
         }
-        return BSThelper(nums,0,nums.length-1);
+        return constructBST(nums,0,nums.length-1);
     }
-    public TreeNode BSThelper(int[] nums,int left,int right){
-        if (left>right){
+    public TreeNode constructBST(int[] nums,int low,int high){
+        if (low>high){
             return null;
         }
-        int mid=(left+right)/2;
+        int mid=(high+low)/2;
         TreeNode root=new TreeNode(nums[mid]);
-        root.left=BSThelper(nums,left,mid-1);
-        root.right=BSThelper(nums,mid+1,right);
+        root.left=constructBST(nums,low,mid-1);
+        root.right=constructBST(nums,mid+1,high);
         return root;
     }
 }
