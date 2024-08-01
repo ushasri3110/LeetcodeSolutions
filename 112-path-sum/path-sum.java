@@ -21,8 +21,8 @@ class Solution {
         if (root.val==targetSum && root.left==null && root.right==null){
             return true;
         }
-        boolean left=hasPathSum(root.left,targetSum-root.val);
-        boolean right=hasPathSum(root.right,targetSum-root.val);
-        return left||right;
+        boolean leftPart=hasPathSum(root.left,targetSum-root.val);
+        boolean rightPart=hasPathSum(root.right,targetSum-root.val);
+        return leftPart||rightPart;
     }
 }
