@@ -4,7 +4,7 @@ class Solution {
         row.add(1);
         for (int i=1;i<=rowIndex;i++){
             for (int j=i-1;j>0;j--){
-                row.set(j,row.get(j)+row.get(j-1));
+                row.set(j,row.get(j-1)+row.get(j));
             }
             row.add(1);
         }
