@@ -7,7 +7,7 @@ class Solution {
             numOnes++;
         }
        }
-       if (numOnes==0||numOnes==1 || numOnes==n){
+       if (numOnes==0||numOnes==n){
         return 0;
        }
        int zeros=0;
