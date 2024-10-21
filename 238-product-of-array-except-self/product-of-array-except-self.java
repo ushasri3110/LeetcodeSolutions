@@ -11,8 +11,8 @@ class Solution {
         for (int j=nums.length-2;j>=0;j--){
             right[j]=right[j+1]*nums[j+1];
         }
-        for (int i=0;i<nums.length;i++){
-            output[i]=left[i]*right[i];
+        for (int k=0;k<nums.length;k++){
+            output[k]=left[k]*right[k];
         }
         return output;
     }
