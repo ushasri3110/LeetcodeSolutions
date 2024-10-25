@@ -3,16 +3,15 @@ class Solution {
         if (s.length()==0){
             return true;
         }
-        int i=0;
-        for (int j=0;j<t.length();j++){
-            if (s.charAt(i)==t.charAt(j)){
-                i++;
+        int j=0;
+        for(int i=0;i<t.length();i++){
+            if (s.charAt(j)==t.charAt(i)){
+                j++;
             }
-            if (i==s.length()){
+            if (j==s.length()){
                 return true;
             }
         }
         return false;
-
     }
 }
