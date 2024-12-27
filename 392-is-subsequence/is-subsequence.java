@@ -9,9 +9,10 @@ class Solution {
                 j++;
             }
             if (j==s.length()){
-                return true;
-            }
+            return true;
         }
+        }
+        
         return false;
     }
 }
