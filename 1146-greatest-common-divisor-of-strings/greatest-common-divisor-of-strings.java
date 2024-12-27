@@ -5,9 +5,10 @@ class Solution {
         if (smaller.equals(larger)){
             return smaller;
         }
-        if (!larger.startsWith(smaller)){
+        if(!larger.startsWith(smaller)){
             return "";
         }
         return gcdOfStrings(larger.substring(smaller.length()),smaller);
+
     }
 }
