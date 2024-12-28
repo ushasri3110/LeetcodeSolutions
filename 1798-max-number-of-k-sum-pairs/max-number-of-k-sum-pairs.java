@@ -1,12 +1,12 @@
 class Solution {
     public int maxOperations(int[] nums, int k) {
-        int operations=0;
+        int maxOperations=0;
         Arrays.sort(nums);
         int i=0;
         int j=nums.length-1;
-        while(i<j){
+        while (i<j){
             if (nums[i]+nums[j]==k){
-                operations++;
+                maxOperations++;
                 i++;
                 j--;
             }
@@ -17,6 +17,6 @@ class Solution {
                 j--;
             }
         }
-        return operations;
+        return maxOperations;
     }
 }
