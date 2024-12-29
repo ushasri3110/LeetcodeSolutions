@@ -21,7 +21,6 @@ class Solution {
             prevNode=currNode;
             currNode=nextNode;
         }
-        head=prevNode;
-        return head;
+        return prevNode;
     }
 }
