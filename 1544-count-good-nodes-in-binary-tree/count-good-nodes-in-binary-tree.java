@@ -19,13 +19,13 @@ class Solution {
     }
     public int goodNodesHelper(TreeNode root,int max_value){
         int count=0;
-        if (root.val>=max_value){
+        if(root.val>=max_value){
             count++;
         }
-        if (root.left!=null){
+        if(root.left!=null){
             count+=goodNodesHelper(root.left,Math.max(max_value,root.val));
         }
-        if (root.right!=null){
+        if(root.right!=null){
             count+=goodNodesHelper(root.right,Math.max(max_value,root.val));
         }
         return count;
