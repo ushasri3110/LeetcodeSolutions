@@ -24,7 +24,7 @@ class Solution {
         return maxZigZag;
     }
     public void helper(TreeNode root,int length,boolean isLeft){
-        if (root==null){
+        if(root==null){
             maxZigZag=Math.max(maxZigZag,length-1);
             return;
         }
