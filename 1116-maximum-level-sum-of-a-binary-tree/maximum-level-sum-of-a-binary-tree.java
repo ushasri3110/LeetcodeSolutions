@@ -18,8 +18,8 @@ class Solution {
         if (root==null){
             return 0;
         }
-        int maxSum=root.val;
-        int res=1;
+        int maxSum=Integer.MIN_VALUE;
+        int res=0;
         int currentLevel=1;
         List<TreeNode> level=new ArrayList<>();
         level.add(root);
