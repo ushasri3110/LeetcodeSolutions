@@ -15,23 +15,25 @@
  */
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
-        if (root == null) return result;
-
-        List<TreeNode> levelList = new ArrayList<>();
-        levelList.add(root);
-
-        while (!levelList.isEmpty()) {
-            result.add(levelList.get(levelList.size() - 1).val);
-
-            List<TreeNode> nextLevelList = new ArrayList<>();
-            for (TreeNode node : levelList) {
-                if (node.left != null) nextLevelList.add(node.left);
-                if (node.right != null) nextLevelList.add(node.right);
-            }
-            levelList = nextLevelList;
+        if(root==null){
+            return new ArrayList<>();
         }
-
-        return result;
+        List<Integer> res=new ArrayList<>();
+        List<TreeNode> level=new ArrayList<>();
+        level.add(root);
+        while (!level.isEmpty()){
+            res.add(level.get(level.size()-1).val);
+            List<TreeNode> nextLevel=new ArrayList<>();
+            for (TreeNode node:level){
+                if (node.left!=null){
+                    nextLevel.add(node.left);
+                }
+                if (node.right!=null){
+                    nextLevel.add(node.right);
+                }
+            }
+            level=nextLevel;
+        }
+        return res;
     }
 }
