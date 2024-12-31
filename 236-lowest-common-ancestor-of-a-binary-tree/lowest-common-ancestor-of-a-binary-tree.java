@@ -12,7 +12,7 @@ class Solution {
         if (root==null){
             return null;
         }
-        if (root.val==p.val||root.val==q.val){
+        if (root.val==p.val || root.val==q.val){
             return root;
         }
         TreeNode left=lowestCommonAncestor(root.left,p,q);
