@@ -19,24 +19,24 @@ class Solution {
             return null;
         }
         if (root.val>key){
-            root.left= deleteNode(root.left,key);
+            root.left=deleteNode(root.left,key);
         }
         else if (root.val<key){
-            root.right= deleteNode(root.right,key);
+            root.right=deleteNode(root.right,key);
         }
         else{
             if (root.left==null && root.right==null){
                 return null;
             }
-            else if (root.left!=null && root.right==null){
-                return root.left;
-            }
-            else if (root.left==null&&root.right!=null){
+            else if (root.left==null && root.right!=null){
                 return root.right;
+            }
+            else if (root.right==null && root.left!=null){
+                return root.left;
             }
             else{
                 TreeNode minNode=root.right;
-                while (minNode.left!=null){
+                while(minNode.left!=null){
                     minNode=minNode.left;
                 }
                 root.val=minNode.val;
