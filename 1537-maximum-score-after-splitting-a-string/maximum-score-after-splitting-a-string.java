@@ -14,7 +14,7 @@ class Solution {
                 leftZeros++;
             }
             else{
-                if (rightOnes>0) rightOnes--;
+                rightOnes--;
             }
             maxScore=Math.max(maxScore,leftZeros+rightOnes);
             j++;
