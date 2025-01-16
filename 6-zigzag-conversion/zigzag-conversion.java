@@ -3,26 +3,26 @@ class Solution {
         if (numRows==1){
             return s;
         }
-        List<List<Character>> res=new ArrayList<>();
-        for(int i=0;i<numRows;i++){
-            res.add(new ArrayList<>());
+        StringBuilder sb=new StringBuilder();
+        List<List<Character>> list=new ArrayList<>();
+        for (int i=0;i<numRows;i++){
+            list.add(new ArrayList<>());
         }
         int i=0;
-        int j=1;
+        int reverse=1;
         for (char c:s.toCharArray()){
-            res.get(i).add(c);
+            list.get(i).add(c);
             if (i==0){
-                j=1;
+                reverse=1;
             }
             else if (i==numRows-1){
-                j=-1;
+                reverse=-1;
             }
-            i=i+j;
+            i=i+reverse;
         }
-        StringBuilder sb=new StringBuilder();
-        for (List<Character> row:res){
-            for (char c:row){
-                sb.append(c);
+        for (List<Character> sub:list){
+            for (char ch:sub){
+                sb.append(ch);
             }
         }
         return sb.toString();
