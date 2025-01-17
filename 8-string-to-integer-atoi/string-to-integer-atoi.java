@@ -4,26 +4,27 @@ class Solution {
         if (s.length()<=0){
             return 0;
         }
-        int index=0;
-        int num=0;
-        boolean isNegative=false;
+        int res=0;
+        boolean isNegative = false;
+        System.out.println(isNegative);
+        int i=0;
         if (s.charAt(0)=='-'||s.charAt(0)=='+'){
-            isNegative=s.charAt(0)=='-';
-            index++;
+            isNegative = s.charAt(0) == '-';
+            i++;
         }
-        while (index<s.length()){
-            char c=s.charAt(index);
-            if (c<'0'||c>'9'){
+        while (i<s.length()){
+            char ch=s.charAt(i);
+            if (!Character.isDigit(ch)){
                 break;
             }
-            int digit=c-'0';
-             if (num > Integer.MAX_VALUE / 10 || (num == Integer.MAX_VALUE / 10 && digit > Integer.MAX_VALUE % 10)) {
+            int digit=ch-'0';
+            if (res>Integer.MAX_VALUE/10 ||(res==Integer.MAX_VALUE/10 && digit>Integer.MAX_VALUE%10) ){
                 return isNegative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
             }
-            num=num*10+digit;
-            index++;
-            
+            res=res*10+digit;
+            i++;
         }
-        return isNegative?num*-1:num;
+
+        return isNegative?res*-1:res;
     }
 }
