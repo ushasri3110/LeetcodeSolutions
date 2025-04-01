@@ -1,27 +1,27 @@
 class Solution {
     public String convert(String s, int numRows) {
-        if (numRows==1){
+        if (numRows==1 || s.length()<numRows){
             return s;
         }
+        List<List<Character>> arr=new ArrayList<>();
         StringBuilder sb=new StringBuilder();
-        List<List<Character>> list=new ArrayList<>();
         for (int i=0;i<numRows;i++){
-            list.add(new ArrayList<>());
+            arr.add(new ArrayList<>());
         }
         int i=0;
-        int reverse=1;
-        for (char c:s.toCharArray()){
-            list.get(i).add(c);
+        int direction=1;
+        for (char ch:s.toCharArray()){
+            arr.get(i).add(ch);
             if (i==0){
-                reverse=1;
+                direction=1;
             }
             else if (i==numRows-1){
-                reverse=-1;
+                direction=-1;
             }
-            i=i+reverse;
+            i=i+direction;
         }
-        for (List<Character> sub:list){
-            for (char ch:sub){
+        for (List<Character> row:arr){
+            for (char ch:row){
                 sb.append(ch);
             }
         }
