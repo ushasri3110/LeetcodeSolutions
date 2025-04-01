@@ -1,13 +1,13 @@
 class Solution {
     public String intToRoman(int num) {
-        int value[]={1000,900,500,400,100,90,50,40,10,9,5,4,1};
-        String symbol[]={"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
-        int i=0;
         StringBuilder sb=new StringBuilder();
+        String[] symbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        int i=0;
         while (num>0){
-            if (num>=value[i]){
-                sb.append(symbol[i]);
-                num=num-value[i];
+            if (num>=values[i]){
+                sb.append(symbols[i]);
+                num=num-values[i];
             }
             else{
                 i++;
