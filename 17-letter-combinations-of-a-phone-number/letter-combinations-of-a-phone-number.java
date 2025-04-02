@@ -1,5 +1,5 @@
 class Solution {
-    List<String> result=new ArrayList<>();
+    List<String> res=new ArrayList<>();
     public List<String> letterCombinations(String digits) {
         Map<Character,String> map=new HashMap<>();
         map.put('2',"abc");
@@ -11,17 +11,17 @@ class Solution {
         map.put('8',"tuv");
         map.put('9',"wxyz");
         if (digits.length()>0){
-            combinationsHelper(map,digits,"",0);
+            combinationsHelper("",digits,map,0);
         }
-        return result;
+        return res;
     }
-    public void combinationsHelper(Map<Character,String> map,String digits,String currentStr,int i){
-        if (currentStr.length()==digits.length()){
-            result.add(currentStr);
+    private void combinationsHelper(String current,String digits,Map<Character,String> map,int i){
+        if (current.length()==digits.length()){
+            res.add(current);
             return;
         }
-        for (Character ch:map.get(digits.charAt(i)).toCharArray()){
-            combinationsHelper(map,digits,currentStr+ch,i+1);
+        for (char ch:map.get(digits.charAt(i)).toCharArray()){
+            combinationsHelper(current+ch,digits,map,i+1);
         }
     }
 }
