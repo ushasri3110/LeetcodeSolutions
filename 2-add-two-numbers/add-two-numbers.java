@@ -13,20 +13,20 @@ class Solution {
         ListNode res=new ListNode(0);
         int carry=0;
         ListNode temp=res;
-        while (l1!=null || l2!=null || carry!=0){
+        while (carry!=0 || l1!=null || l2!=null){
             int sum=carry;
             if (l1!=null){
-                sum+=l1.val;
+                sum=sum+l1.val;
                 l1=l1.next;
             }
             if (l2!=null){
-                sum+=l2.val;
+                sum=sum+l2.val;
                 l2=l2.next;
             }
-            int nodeVal=sum%10;
-            ListNode newNode=new ListNode(nodeVal);
+            int num=sum%10;
+            ListNode newNode=new ListNode(num);
             temp.next=newNode;
-            temp=temp.next;
+            temp=newNode;
             carry=sum/10;
         }
         return res.next;
