@@ -21,7 +21,7 @@ class Solution {
             head=head.next;
             temp=temp.next;
         }
-        temp.next=temp.next.next;
-        return res.next;
+       temp.next=temp.next.next;
+       return res.next;
     }
 }
