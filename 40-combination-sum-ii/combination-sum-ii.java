@@ -1,28 +1,26 @@
 class Solution {
-    List<List<Integer>> result=new ArrayList<>();
+    List<List<Integer>> res=new ArrayList<>();
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         Arrays.sort(candidates);
-        helper(candidates,new ArrayList<Integer>(),target,0);
-        return result;
+        combinationSumHelper(0,new ArrayList<>(),0,candidates,target);
+        return res;
     }
-    public void helper(int[] candidates,ArrayList<Integer> temp,int rem,int index){
-        if (rem<0){
+    public void combinationSumHelper(int index,List<Integer> current,int sum,int[] candidates,int target){
+        if (sum > target) return;
+        if (index==candidates.length){
+            if (sum==target){
+                res.add(new ArrayList<>(current));
+            }
             return;
         }
-        else if (rem==0){
-            if (!result.contains(temp)){
-                result.add(new ArrayList<>(temp));
-            }
+        current.add(candidates[index]);
+        sum+=candidates[index];
+        combinationSumHelper(index+1,current,sum,candidates,target);
+        current.remove(current.size()-1);
+        sum-=candidates[index];
+        while (index+1 < candidates.length && candidates[index]==candidates[index+1]){
+            index++;
         }
-        else{
-           for(int i=index;i<candidates.length && candidates[i]<=rem;i++){
-            if (i > index && candidates[i] == candidates[i - 1]) {
-                    continue; // Skip duplicates
-                }
-            temp.add(candidates[i]);
-            helper(candidates,temp,rem-candidates[i],i+1);
-            temp.remove(temp.size()-1);
-           }
-        }
+        combinationSumHelper(index+1,current,sum,candidates,target);
     }
 }
