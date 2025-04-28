@@ -1,19 +1,20 @@
 class Solution {
-    int count=0;
     public int findTargetSumWays(int[] nums, int target) {
-        findTargetSumWaysHelper(0,nums,0,target);
-        return count;
+        Map<String,Integer> memo=new HashMap<>();
+        return findTargetSumWaysHelper(0,nums,0,target,memo);
     }
-    public void findTargetSumWaysHelper(int index,int[] nums,int sum, int target){
+    public int findTargetSumWaysHelper(int index,int[] nums,int sum, int target,Map<String,Integer> memo){
         if (index==nums.length){
-            if (sum==target){
-                count++;
-            }
-            return;
+            if (sum==target) return 1;
+            else return 0;
         }
-        sum+=nums[index];
-        findTargetSumWaysHelper(index+1,nums,sum,target);
-        sum=sum- (2*nums[index]);
-        findTargetSumWaysHelper(index+1,nums,sum,target);
+        String key=index+","+sum;
+        if (memo.containsKey(key)){
+            return memo.get(key);
+        }
+        int add=findTargetSumWaysHelper(index+1,nums,sum+nums[index],target,memo);
+        int sub=findTargetSumWaysHelper(index+1,nums,sum-nums[index],target,memo);
+        memo.put(key,add+sub);
+        return memo.get(key);
     }
 }
