@@ -14,20 +14,29 @@
  * }
  */
 class Solution {
-    public int height(TreeNode root){
-        if (root==null){
-            return 0;
-        }
-        return 1+Math.max(height(root.left),height(root.right));
-    }
     public int diameterOfBinaryTree(TreeNode root) {
-        if (root==null){
-            return 0;
+        Map<TreeNode,Integer> map=new HashMap<>();
+        Stack<TreeNode> stack=new Stack();
+        int diameter=0;
+        if (root!=null){
+            stack.push(root);
         }
-        int leftHeight=height(root.left);
-        int rightHeight=height(root.right);
-        int leftDiameter=diameterOfBinaryTree(root.left);
-        int rightDiameter=diameterOfBinaryTree(root.right);
-        return Math.max(Math.max(leftDiameter,rightDiameter),leftHeight+rightHeight);
+        while (!stack.isEmpty()){
+            TreeNode node = stack.peek();
+            if(node.left!=null && !map.containsKey(node.left)){
+                stack.push(node.left);
+            }
+            else if (node.right!=null && !map.containsKey(node.right)){
+                stack.push(node.right);
+            }
+            else{
+                stack.pop();
+                int leftDepth=map.getOrDefault(node.left,0);
+                int rightDepth=map.getOrDefault(node.right,0);
+                map.put(node,1+Math.max(leftDepth,rightDepth));
+                diameter=Math.max(diameter,leftDepth+rightDepth);
+            }
+        }
+        return diameter;
     }
 }
