@@ -1,31 +1,31 @@
 class Solution {
     public String decodeString(String s) {
-        Stack<Integer> numStack=new Stack<>();
-        Stack<String> strStack=new Stack<>();
-        int num=0;
-        String output="";
-        for(char ch:s.toCharArray()){
+        Stack<Integer> integerStack=new Stack<>();
+        Stack<StringBuilder> stringStack=new Stack<>();
+        StringBuilder current=new StringBuilder();
+        int k=0;
+        for (char ch:s.toCharArray()){
             if (Character.isDigit(ch)){
-                num=num*10+(ch-'0');
+                k=k*10+(ch-'0');
             }
             else if (ch=='['){
-                numStack.push(num);
-                strStack.push(output);
-                num=0;
-                output="";
+                integerStack.push(k);
+                k=0;
+                stringStack.push(current);
+                current=new StringBuilder();
             }
             else if (ch==']'){
-                int repeatCount=numStack.pop();
-                String current=strStack.pop();
-                for (int i=0;i<repeatCount;i++){
-                    current=current+output;
+                StringBuilder str=stringStack.pop();
+                int count=integerStack.pop();
+                for (int i=0;i<count;i++){
+                    str.append(current);
                 }
-                output=current;
+                current=str;
             }
             else{
-                output+=ch;
+                current.append(ch);
             }
         }
-        return output;
+        return current.toString();
     }
 }
