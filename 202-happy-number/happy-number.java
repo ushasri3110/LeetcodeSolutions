@@ -1,21 +1,17 @@
 class Solution {
     public boolean isHappy(int n) {
-        int hare=n;
-        int tortoise=n;
-        do{
-            tortoise=square(tortoise);
-            hare=square(square(hare));
+        Set<Integer> set=new HashSet<>();
+        while (true){
+            int sum=0;
+            while (n!=0){
+                int rem=n%10;
+                sum+=Math.pow(rem,2);
+                n=n/10;
+            }
+            if (sum==1) return true;
+            n=sum;
+            if (set.contains(n)) return false;
+            set.add(n);
         }
-        while (tortoise!=hare);
-        return tortoise==1;
-    }
-    public int square(int n){
-        int ans=0;
-        while (n>0){
-            int rem=n%10;
-            ans+=rem*rem;
-            n=n/10;
-        }
-        return ans;
     }
 }
