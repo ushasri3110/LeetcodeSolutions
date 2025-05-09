@@ -2,14 +2,9 @@ class Solution {
     public boolean backspaceCompare(String s, String t) {
         Stack<Character> stack1=helper(s);
         Stack<Character> stack2=helper(t);
-        while (!stack1.isEmpty() && !stack2.isEmpty()){
-            if (stack1.peek()==stack2.peek()){
+        while (!stack1.isEmpty() && !stack2.isEmpty() && stack1.peek()==stack2.peek()){
                 stack1.pop();
                 stack2.pop();
-            }
-            else{
-                return false;
-            }
         }
         return stack1.isEmpty() && stack2.isEmpty();
     }
