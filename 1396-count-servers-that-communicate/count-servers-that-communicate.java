@@ -1,29 +1,25 @@
 class Solution {
     public int countServers(int[][] grid) {
-        int count=0;
-        int rowCount[]=new int[grid[0].length];
-        int colCount[]=new int[grid.length];
-        
-        for (int i=0;i<grid.length;i++){
-            for (int j=0;j<grid[0].length;j++){
+        int rows=grid.length;
+        int cols=grid[0].length;
+        int servers=0;
+        int rowCount[]=new int[rows];
+        int colCount[]=new int[cols];
+        for (int i=0;i<rows;i++){
+            for (int j=0;j<cols;j++){
                 if (grid[i][j]==1){
-                    rowCount[j]++;
-                    colCount[i]++;
+                    rowCount[i]++;
+                    colCount[j]++;
                 }
             }
         }
-
-        for (int i=0;i<grid.length;i++){
-            for (int j=0;j<grid[0].length;j++){
-                if (grid[i][j]==1){
-                    if (rowCount[j]>1 || colCount[i]>1){
-                        count++;
-                    }
+        for (int i=0;i<rows;i++){
+            for (int j=0;j<cols;j++){
+                if (grid[i][j]==1 && (rowCount[i]>1 || colCount[j]>1)){
+                    servers++;
                 }
             }
         }
-
-        return count;
-
+        return servers;
     }
 }
