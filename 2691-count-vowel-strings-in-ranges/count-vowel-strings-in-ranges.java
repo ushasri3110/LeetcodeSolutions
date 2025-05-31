@@ -18,16 +18,9 @@ class Solution {
         }
         int[] res=new int[queries.length];
         for (int i=0;i<queries.length;i++){
-            int count=0;
             int start=queries[i][0];
             int end=queries[i][1];
-            if (start>0){
-                count=ps[end]-ps[start-1];
-            }
-            else{
-                count=ps[end];
-            }
-            res[i]=count;
+            res[i]=start>0?ps[end]-ps[start-1]:ps[end];
         }
         return res;
     }
