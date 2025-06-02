@@ -1,19 +1,26 @@
 class Solution {
     public int[] minOperations(String boxes) {
         int n=boxes.length();
-        int res[]=new int[n];
-        Set<Integer> set=new HashSet<>();
+        int[] res=new int[n];
+        int rightOnes=0;
+        int total=0;
+        int prefixSum=0;
+        int leftOnes=0;
         for (int i=0;i<n;i++){
             if (boxes.charAt(i)=='1'){
-                set.add(i);
+                rightOnes++;
+                total+=i;
             }
         }
         for (int i=0;i<n;i++){
-            int count=0;
-            for(int j:set){
-                count+=Math.abs(i-j);
+            int moves=total+prefixSum;
+            res[i]=moves;
+            if (boxes.charAt(i)=='1'){
+                leftOnes++;
+                rightOnes--;
             }
-            res[i]=count;
+            prefixSum+=leftOnes;
+            total-=rightOnes;
         }
         return res;
     }
