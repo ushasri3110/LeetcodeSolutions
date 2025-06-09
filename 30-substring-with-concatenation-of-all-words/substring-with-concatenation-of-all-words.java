@@ -1,53 +1,40 @@
-import java.util.*;
-
 class Solution {
     public List<Integer> findSubstring(String s, String[] words) {
-        List<Integer> result = new ArrayList<>();
-        if (s == null || s.length() == 0 || words == null || words.length == 0) {
-            return result;
+        List<Integer> res=new ArrayList<>();
+        if (s.length()==0||words.length==0) return res;
+        int numWords=words.length;
+        int wordLength=words[0].length();
+        int totalLength=numWords*wordLength;
+        Map<String,Integer> wordCount=new HashMap<>();
+        for (String str:words){
+            wordCount.put(str,wordCount.getOrDefault(str,0)+1);
         }
-
-        int wordLength = words[0].length();
-        int wordCount = words.length;
-        int totalLength = wordLength * wordCount;
-
-        if (s.length() < totalLength) {
-            return result;
-        }
-
-        HashMap<String, Integer> map = new HashMap<>();
-        for (String word : words) {
-            map.put(word, map.getOrDefault(word, 0) + 1);
-        }
-
-        for (int i = 0; i < wordLength; i++) {
-            int left = i, count = 0;
-            HashMap<String, Integer> visited = new HashMap<>();
-
-            for (int right = i; right <= s.length() - wordLength; right += wordLength) {
-                String word = s.substring(right, right + wordLength);
-                if (map.containsKey(word)) {
-                    visited.put(word, visited.getOrDefault(word, 0) + 1);
+        for (int i=0;i<wordLength;i++){
+            int left=i;
+            Map<String,Integer> windowMap=new HashMap<>();
+            int count=0;
+            for (int right=i;right+wordLength<=s.length();right+=wordLength){
+                String word=s.substring(right,right+wordLength);
+                if (wordCount.containsKey(word)){
+                    windowMap.put(word,windowMap.getOrDefault(word,0)+1);
                     count++;
-
-                    while (visited.get(word) > map.get(word)) {
-                        String leftWord = s.substring(left, left + wordLength);
-                        visited.put(leftWord, visited.get(leftWord) - 1);
+                    while (windowMap.get(word)>wordCount.get(word)){
+                        String leftWord=s.substring(left,left+wordLength);
+                        windowMap.put(leftWord,windowMap.get(leftWord)-1);
                         count--;
-                        left += wordLength;
+                        left+=wordLength;
                     }
-
-                    if (count == wordCount) {
-                        result.add(left);
+                    if (count==numWords){
+                        res.add(left);
                     }
-                } else {
-                    visited.clear();
-                    count = 0;
-                    left = right + wordLength;
+                }
+                else{
+                    windowMap.clear();
+                    count=0;
+                    left=right+wordLength;
                 }
             }
         }
-
-        return result;
+        return res;
     }
 }
