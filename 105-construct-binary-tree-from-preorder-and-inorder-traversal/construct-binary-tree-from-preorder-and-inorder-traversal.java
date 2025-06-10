@@ -14,24 +14,21 @@
  * }
  */
 class Solution {
-    static int preorderIndex;
+    int preIndex=0;
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        preorderIndex=0;
-        return buildTreeHelper(preorder,inorder,0,inorder.length-1);
+        return helper(preorder,inorder,0,inorder.length-1);
     }
-    public TreeNode buildTreeHelper(int[] preorder,int[] inorder,int inStart,int inEnd){
-        if (inStart>inEnd || preorderIndex>=preorder.length){
-            return null;
-        }
-        int rootData=preorder[preorderIndex];
+    private TreeNode helper(int[] preorder,int[] inorder,int inStart,int inEnd){
+        if (inStart>inEnd || preIndex>=preorder.length) return null;
+        int rootData=preorder[preIndex];
         TreeNode root=new TreeNode(rootData);
-        preorderIndex++;
-        int rootIndexInInorder=inStart;
-        while (inorder[rootIndexInInorder]!=rootData && rootIndexInInorder<=inEnd){
-            rootIndexInInorder++;
+        preIndex++;
+        int rootIndex=inStart;
+        while (rootIndex<=inEnd && inorder[rootIndex]!=rootData){
+            rootIndex++;
         }
-        root.left=buildTreeHelper(preorder,inorder,inStart,rootIndexInInorder-1);
-        root.right=buildTreeHelper(preorder,inorder,rootIndexInInorder+1,inEnd);
+        root.left=helper(preorder,inorder,inStart,rootIndex-1);
+        root.right=helper(preorder,inorder,rootIndex+1,inEnd);
         return root;
     }
 }
