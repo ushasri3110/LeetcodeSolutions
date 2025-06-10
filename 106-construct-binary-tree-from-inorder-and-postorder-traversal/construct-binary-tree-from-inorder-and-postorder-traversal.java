@@ -14,24 +14,22 @@
  * }
  */
 class Solution {
-    static int postorderIndex;
+    int postIndex;
     public TreeNode buildTree(int[] inorder, int[] postorder) {
-        postorderIndex=postorder.length-1;
-        return buildTreeHelper(inorder,postorder,0,inorder.length-1);
+        postIndex=postorder.length-1;
+        return helper(inorder,postorder,0,inorder.length-1);
     }
-    public TreeNode buildTreeHelper(int[] inorder,int[] postorder,int start,int end){
-        if (start>end || postorderIndex<0){
-            return null;
-        }
-        int rootData=postorder[postorderIndex];
-        postorderIndex--;
+    private TreeNode helper(int[] inorder,int[] postorder,int inStart,int inEnd){
+        if (inStart>inEnd || postIndex<0) return null;
+        int rootData=postorder[postIndex];
+        postIndex--;
         TreeNode root=new TreeNode(rootData);
-        int rootIndexInInorder=start;
-        while(inorder[rootIndexInInorder]!=rootData && rootIndexInInorder<=end){
-            rootIndexInInorder++;
+        int rootIndex=inStart;
+        while (inorder[rootIndex]!=rootData && rootIndex<=inEnd){
+            rootIndex++;
         }
-        root.right=buildTreeHelper(inorder,postorder,rootIndexInInorder+1,end);
-        root.left=buildTreeHelper(inorder,postorder,start,rootIndexInInorder-1);
+        root.right=helper(inorder,postorder,rootIndex+1,inEnd);
+        root.left=helper(inorder,postorder,inStart,rootIndex-1);
         return root;
     }
 }
