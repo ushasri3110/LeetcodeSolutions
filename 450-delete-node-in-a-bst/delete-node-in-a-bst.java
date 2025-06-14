@@ -15,33 +15,34 @@
  */
 class Solution {
     public TreeNode deleteNode(TreeNode root, int key) {
-        if (root==null){
-            return null;
-        }
-        if (root.val>key){
-            root.left=deleteNode(root.left,key);
-        }
-        else if (root.val<key){
-            root.right=deleteNode(root.right,key);
-        }
-        else{
-            if (root.left==null && root.right==null){
-                return null;
-            }
-            else if (root.left==null && root.right!=null){
-                return root.right;
-            }
-            else if (root.right==null && root.left!=null){
-                return root.left;
+        if (root==null) return null;
+        if (root.val==key) return helper(root);
+        TreeNode dummy=root;
+        while (root!=null){
+            if (root.val>key){
+                if (root.left!=null && root.left.val==key) root.left=helper(root.left);
+                else root=root.left;
             }
             else{
-                TreeNode minNode=root.right;
-                while(minNode.left!=null){
-                    minNode=minNode.left;
-                }
-                root.val=minNode.val;
-                root.right=deleteNode(root.right,minNode.val);
+                if (root.right!=null && root.right.val==key) root.right=helper(root.right);
+                else root=root.right;
             }
+        }
+        return dummy;
+    }
+    private TreeNode helper(TreeNode root){
+        if (root.left==null) return root.right;
+        else if (root.right==null) return root.left;
+        else{
+            TreeNode rightChild=root.right;
+            TreeNode lastRight=findRight(root.left);
+            lastRight.right=rightChild;
+            return root.left;
+        }
+    }
+    private TreeNode findRight(TreeNode root){
+        while (root.right!=null){
+            root=root.right;
         }
         return root;
     }
