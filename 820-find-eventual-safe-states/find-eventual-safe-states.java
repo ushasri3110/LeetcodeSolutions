@@ -1,47 +1,37 @@
 class Solution {
-
-    public boolean dfs(
-        int node,
-        int[][] adj,
-        boolean[] visit,
-        boolean[] inStack
-    ) {
-        // If the node is already in the stack, we have a cycle.
-        if (inStack[node]) {
-            return true;
-        }
-        if (visit[node]) {
-            return false;
-        }
-        // Mark the current node as visited and part of current recursion stack.
-        visit[node] = true;
-        inStack[node] = true;
-        for (int neighbor : adj[node]) {
-            if (dfs(neighbor, adj, visit, inStack)) {
-                return true;
-            }
-        }
-        // Remove the node from the stack.
-        inStack[node] = false;
-        return false;
-    }
-
     public List<Integer> eventualSafeNodes(int[][] graph) {
-        int n = graph.length;
-        boolean[] visit = new boolean[n];
-        boolean[] inStack = new boolean[n];
-
-        for (int i = 0; i < n; i++) {
-            dfs(i, graph, visit, inStack);
+        List<Integer> topo=new ArrayList<>();
+        int v=graph.length;
+        int[] indegree=new int[v];
+        List<Integer>[] adj=new List[v];
+        for (int i=0;i<v;i++){
+            adj[i]=new ArrayList<>();
         }
-
-        List<Integer> safeNodes = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            if (!inStack[i]) {
-                safeNodes.add(i);
+        for (int i=0;i<v;i++){
+            for (int j:graph[i]){
+                adj[j].add(i);
             }
         }
-
-        return safeNodes;
+        for (int i=0;i<v;i++){
+            for (int j:adj[i]){
+                indegree[j]++;
+            }
+        }
+        Queue<Integer> q=new LinkedList<>();
+        for (int i=0;i<v;i++){
+            if (indegree[i]==0) q.offer(i);
+        }
+        while (!q.isEmpty()){
+            int node=q.poll();
+            topo.add(node);
+            for (int it:adj[node]){
+                indegree[it]--;
+                if (indegree[it]==0){
+                    q.offer(it);
+                }
+            }
+        }
+        Collections.sort(topo);
+        return topo;
     }
 }
