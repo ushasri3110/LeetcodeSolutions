@@ -1,27 +1,16 @@
 class Solution {
     public boolean closeStrings(String word1, String word2) {
-        if (word1.length()!=word2.length()){
-            return false;
-        }
-        int word1f[]=new int[26];
-        int word2f[]=new int[26];
-        for (char c:word1.toCharArray()){
-            word1f[c-'a']++;
-        }
-        for (char c:word2.toCharArray()){
-            word2f[c-'a']++;
-        }
+        int[] arr1=new int[26];
+        int[] arr2=new int[26];
+        for (char ch:word1.toCharArray()) arr1[ch-'a']++;
+        for (char ch:word2.toCharArray()) arr2[ch-'a']++;
         for (int i=0;i<26;i++){
-            if (word1f[i]==0 && word2f[i]!=0){
-                return false;
-            }
+            if ((arr1[i]==0 && arr2[i]!=0) || (arr1[i]==0 && arr2[i]!=0))return false;
         }
-        Arrays.sort(word1f);
-        Arrays.sort(word2f);
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
         for (int i=0;i<26;i++){
-            if (word1f[i]!=word2f[i]){
-                return false;
-            }
+            if (arr1[i]!=arr2[i]) return false;
         }
         return true;
     }
