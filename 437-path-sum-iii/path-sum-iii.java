@@ -15,22 +15,16 @@
  */
 class Solution {
     public int pathSum(TreeNode root, int targetSum) {
-        HashMap<Long, Integer> map = new HashMap<>();
-        map.put(0L, 1); 
-        return pathSumHelper(root, 0L, targetSum, map);
+        if (root==null) return 0;
+        return pathSumHelper(root,targetSum)+pathSum(root.left,targetSum)+pathSum(root.right,targetSum);
+    }
+    private int pathSumHelper(TreeNode root,long target){
+        if (root==null) return 0;
+        int count=0;
+        if (root.val==target) count++;
+        count+=pathSumHelper(root.left,target-root.val);
+        count+=pathSumHelper(root.right,target-root.val);
+        return count;
     }
 
-    public int pathSumHelper(TreeNode root, long currentSum, int targetSum, HashMap<Long, Integer> map) {
-        if (root == null) {
-            return 0;
-        }
-        currentSum += root.val;
-        int res = map.getOrDefault(currentSum - targetSum, 0);
-        map.put(currentSum, map.getOrDefault(currentSum, 0) + 1);
-        res += pathSumHelper(root.left, currentSum, targetSum, map);
-        res += pathSumHelper(root.right, currentSum, targetSum, map);
-        map.put(currentSum, map.get(currentSum) - 1);
-
-        return res;
-    }
 }
