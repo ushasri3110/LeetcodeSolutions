@@ -7,19 +7,16 @@ class Solution {
             if (nums[mid]==target){
                 return mid;
             }
-            else if (nums[mid]>=nums[left])
-            {
-                if (nums[left]<=target && nums[mid]>=target){
+            if (nums[mid]>=nums[left]){
+                if (nums[left]<=target && nums[mid]>target){
                     right=mid-1;
                 }
-                else
-                {
+                else{
                     left=mid+1;
                 }
-
             }
-            else {
-                if (nums[mid]<=target && nums[right]>=target){
+            else{
+                if (nums[mid]<target && target<=nums[right]){
                     left=mid+1;
                 }
                 else{
