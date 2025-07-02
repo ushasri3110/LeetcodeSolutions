@@ -14,7 +14,7 @@ class Solution {
             if (current>left && current>right){
                 return new int[]{maxRow,mid};
             }
-            else if (current<left) high=mid-1;
+            else if (current<left) high=mid;
             else low=mid+1;
         }
         return new int[]{-1,-1};
