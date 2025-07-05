@@ -14,27 +14,22 @@
  * }
  */
 class Solution {
-    int maxZigZag=0;
+    int maxLength=0;
     public int longestZigZag(TreeNode root) {
-        if (root==null){
-            return 0;
-        }
-        helper(root.left,1,true);
-        helper(root.right,1,false);
-        return maxZigZag;
+        dfs(root.left,1,true);
+        dfs(root.right,1,false);
+        return maxLength;
     }
-    public void helper(TreeNode root,int length,boolean isLeft){
-        if(root==null){
-            maxZigZag=Math.max(maxZigZag,length-1);
-            return;
-        }
+    public void dfs(TreeNode root,int length,boolean isLeft){
+        if (root==null) return;
+        maxLength=Math.max(maxLength,length);
         if (isLeft){
-            helper(root.left,1,true);
-            helper(root.right,length+1,false);
+            dfs(root.right,length+1,false);
+            dfs(root.left,1,true);
         }
         else{
-            helper(root.right,1,false);
-            helper(root.left,length+1,true);
+            dfs(root.left,length+1,true);
+            dfs(root.right,1,false);
         }
     }
 }
