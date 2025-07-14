@@ -5,13 +5,15 @@ class Solution {
         for (int end=0;end<s.length();end++){
             freq[s.charAt(end)-'A']++;
             maxFreq=Math.max(maxFreq,freq[s.charAt(end)-'A']);
-            while ((end-start+1)-maxFreq >k){
+            if ((end-start+1)-maxFreq >k){
                 char leftChar=s.charAt(start);
                 freq[leftChar-'A']--;
                 for (int i:freq) maxFreq=Math.max(maxFreq,i);
                 start++;
             }
-            maxLength=Math.max(maxLength,end-start+1);
+            if ((end-start+1)-maxFreq <=k){
+                maxLength=Math.max(maxLength,end-start+1);
+            }
         }
         return maxLength;
     }
