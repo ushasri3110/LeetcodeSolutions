@@ -1,22 +1,26 @@
 class Solution {
     public String longestPalindrome(String s) {
-        String result="";
-        for (int i=0;i<s.length();i++){
-            String evenPalindrome=palindromeHelper(i,i+1,s);
-            String oddPalindrome=palindromeHelper(i,i,s);
-            String longest=evenPalindrome.length()>oddPalindrome.length()?evenPalindrome:oddPalindrome;
-            if (longest.length()>result.length()){
-                result=longest;
+        int i=0;
+        int longest=0;
+        int startIndex=0;
+        while(i<s.length()){
+            int oddLength=palindromeHelper(i,i,s);
+            int evenLength=palindromeHelper(i,i+1,s);
+            int currentLength=Math.max(oddLength,evenLength);
+            if (currentLength>longest){
+                longest=currentLength;
+                startIndex=i-(currentLength-1)/2;
             }
+            i++;
         }
-        return result;
+        return s.substring(startIndex,startIndex+longest);
     }
-    public String palindromeHelper(int start,int end,String s){
-        int n=s.length();
-        while (start>=0 && end<n && s.charAt(start)==s.charAt(end)){
+    public int palindromeHelper(int start,int end,String str){
+        while (start>=0 && end<str.length() && str.charAt(start)==str.charAt(end)){
             start--;
             end++;
         }
-        return s.substring(start+1,end);
+        return end-start-1;
     }
+    
 }
