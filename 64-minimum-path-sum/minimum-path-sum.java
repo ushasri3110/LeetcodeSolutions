@@ -4,7 +4,6 @@ class Solution {
         int n = grid[0].length;
 
         int[] dp = new int[n];
-        Arrays.fill(dp, Integer.MAX_VALUE);
 
         for (int i = 0; i < m; i++) {
             int[] temp = new int[n];
