@@ -1,22 +1,25 @@
 class Solution {
     public int minFallingPathSum(int[][] matrix) {
-        int n=matrix.length;
-        int[][] dp=new int[n][n];
-        for (int i=0;i<n;i++){
-            dp[0][i]=matrix[0][i];
+        int n = matrix.length;
+        int[] dp = new int[n];
+        for (int j = 0; j < n; j++) {
+            dp[j] = matrix[0][j];
         }
-        for (int i=1;i<n;i++){
-            for (int j=0;j<n;j++){
-                int minValue=dp[i-1][j];
-                if (j-1>=0) minValue=Math.min(dp[i-1][j-1],minValue);
-                if (j+1<n) minValue=Math.min(dp[i-1][j+1],minValue);
-                dp[i][j]=matrix[i][j]+minValue;
+        for (int i = 1; i < n; i++) {
+            int[] temp = new int[n];
+            for (int j = 0; j < n; j++) {
+                int topLeft = j > 0 ? dp[j - 1] : Integer.MAX_VALUE;
+                int top = dp[j];
+                int topRight = j < n - 1 ? dp[j + 1] : Integer.MAX_VALUE;
+                temp[j] = matrix[i][j] + Math.min(topLeft, Math.min(top, topRight));
             }
+            dp = temp; 
         }
-        int result=Integer.MAX_VALUE;
-        for (int i = 0; i < n; i++) {
-            result = Math.min(result, dp[n - 1][i]);
+        int minPathSum = Integer.MAX_VALUE;
+        for (int val : dp) {
+            minPathSum = Math.min(minPathSum, val);
         }
-        return result;
+
+        return minPathSum;
     }
 }
