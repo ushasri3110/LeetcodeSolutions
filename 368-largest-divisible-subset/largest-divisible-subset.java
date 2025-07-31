@@ -8,7 +8,7 @@ class Solution {
         for (int i=1;i<n;i++){
             parent[i]=i;
             for (int prev=0;prev<i;prev++){
-                if ((nums[prev]%nums[i]==0 || nums[i]%nums[prev]==0) && dp[i]<dp[prev]+1){
+                if (nums[i]%nums[prev]==0  && dp[i]<dp[prev]+1){
                     dp[i]=dp[prev]+1;
                     parent[i]=prev;
                 }
