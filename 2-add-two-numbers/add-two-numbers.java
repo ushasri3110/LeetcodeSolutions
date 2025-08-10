@@ -23,11 +23,11 @@ class Solution {
                 sum+=l2.val;
                 l2=l2.next;
             }
-            int nodeVal=sum%10;
-            carry=sum/10;
-            ListNode newNode=new ListNode(nodeVal);
+            int data=sum%10;
+            ListNode newNode=new ListNode(data);
             temp.next=newNode;
-            temp=newNode;
+            temp=temp.next;
+            carry=sum/10;
         }
         return res.next;
     }
