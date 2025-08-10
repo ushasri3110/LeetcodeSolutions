@@ -8,15 +8,18 @@ class Solution {
         map.put('C',100);
         map.put('D',500);
         map.put('M',1000);
-        int ans=0;
-        for (int i=0;i<s.length();i++){
-            if (i<s.length()-1 && map.get(s.charAt(i))<map.get(s.charAt(i+1))){
-                ans-=map.get(s.charAt(i));
+        int i=0;
+        int n=s.length();
+        int res=0;
+        while (i<n){
+            if (i<n-1 && map.get(s.charAt(i)) < map.get(s.charAt(i+1))){
+                res-=map.get(s.charAt(i));
             }
             else{
-                ans+=map.get(s.charAt(i));
+                res+=map.get(s.charAt(i));
             }
+            i++;
         }
-        return ans;
+        return res;
     }
 }
