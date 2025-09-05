@@ -16,13 +16,13 @@
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> res=new ArrayList<>();
-        helper(root,res);
+        dfs(root,res);
         return res;
     }
-    private void helper(TreeNode root,List<Integer> res){
+    public void dfs(TreeNode root,List<Integer> preorder){
         if (root==null) return;
-        res.add(root.val);
-        helper(root.left,res);
-        helper(root.right,res);
+        preorder.add(root.val);
+        dfs(root.left,preorder);
+        dfs(root.right,preorder);
     }
 }
