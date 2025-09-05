@@ -15,12 +15,11 @@
  */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
-        if (root==null) return true;
-        return helper(root.left,root.right);
+        return isSymmetricHelper(root.left,root.right);
     }
-    public boolean helper(TreeNode leftTree,TreeNode rightTree){
-        if (leftTree==null && rightTree==null) return true;
-        if (leftTree == null || rightTree == null || leftTree.val != rightTree.val) return false;
-        return helper(leftTree.left,rightTree.right) && helper(leftTree.right,rightTree.left);
+    public boolean isSymmetricHelper(TreeNode p,TreeNode q){
+        if (p==null && q==null) return true;
+        if (p==null || q==null || p.val!=q.val) return false;
+        return isSymmetricHelper(p.left,q.right) && isSymmetricHelper(p.right,q.left);
     }
 }
