@@ -25,25 +25,19 @@
  */
 class Solution {
     public TreeNode sortedListToBST(ListNode head) {
-        if (head==null){
-            return null;
-        }
-        return convertToBST(head,null);
+        return buildTree(head,null);
     }
-    public TreeNode convertToBST(ListNode head,ListNode tail){
-        if (head==tail){
-            return null;
-        }
-        ListNode slow=head;
-        ListNode fast=head;
-        while (fast!=tail && fast.next!=tail){
+    private TreeNode buildTree(ListNode start,ListNode end){
+        if (start==end) return null;
+        ListNode slow=start;
+        ListNode fast=start;
+        while (fast!=end && fast.next!=end){
             slow=slow.next;
             fast=fast.next.next;
         }
         TreeNode root=new TreeNode(slow.val);
-        root.left=convertToBST(head,slow);
-        root.right=convertToBST(slow.next,tail);
-
+        root.left=buildTree(start,slow);
+        root.right=buildTree(slow.next,end);
         return root;
     }
 }
