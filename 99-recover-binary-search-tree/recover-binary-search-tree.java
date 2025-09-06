@@ -24,7 +24,7 @@ class Solution {
     public void inorder(TreeNode root){
         if (root==null) return;
         inorder(root.left);
-        if (prev!=null && prev.val > root.val){
+        if (prev.val > root.val){
             if (first==null) first=prev;
             second=root;
         }
