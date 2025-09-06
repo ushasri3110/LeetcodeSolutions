@@ -17,19 +17,21 @@ class Solution {
     int postIndex;
     public TreeNode buildTree(int[] inorder, int[] postorder) {
         postIndex=postorder.length-1;
-        return helper(inorder,postorder,0,inorder.length-1);
+        return buildTreeHelper(inorder,postorder,0,inorder.length-1);
     }
-    private TreeNode helper(int[] inorder,int[] postorder,int inStart,int inEnd){
-        if (inStart>inEnd || postIndex<0) return null;
-        int rootData=postorder[postIndex];
-        postIndex--;
-        TreeNode root=new TreeNode(rootData);
-        int rootIndex=inStart;
-        while (inorder[rootIndex]!=rootData && rootIndex<=inEnd){
-            rootIndex++;
+    public TreeNode buildTreeHelper(int[] inorder,int[] postorder,int inStart,int inEnd){
+        if (inStart>inEnd) return null;
+        int rootVal=postorder[postIndex--];
+        TreeNode root=new TreeNode(rootVal);
+        int inIndex=0;
+        for (int i=inStart;i<=inEnd;i++){
+            if (inorder[i]==rootVal){
+                inIndex=i;
+                break;
+            }
         }
-        root.right=helper(inorder,postorder,rootIndex+1,inEnd);
-        root.left=helper(inorder,postorder,inStart,rootIndex-1);
+        root.right=buildTreeHelper(inorder,postorder,inIndex+1,inEnd);
+        root.left=buildTreeHelper(inorder,postorder,inStart,inIndex-1);
         return root;
     }
 }
