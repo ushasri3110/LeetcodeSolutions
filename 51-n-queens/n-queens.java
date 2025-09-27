@@ -1,54 +1,51 @@
 class Solution {
     List<List<String>> res=new ArrayList<>();
-    public boolean isSafe(int row,int col,List<String> board,int n){
-        int dupRow=row;
-        int dupCol=col;
-        while (col>=0){
-            if (board.get(row).charAt(col)=='Q') return false;
-            col--;
+    public List<List<String>> solveNQueens(int n) {
+        char[][] board=new char[n][n];
+        for (char[] ch:board){
+            Arrays.fill(ch,'.');
         }
-        row=dupRow;
-        col=dupCol;
-        while (row>=0 && col>=0){
-            if (board.get(row).charAt(col)=='Q') return false;
-            col--;
-            row--;
-        }
-        row=dupRow;
-        col=dupCol;
-        while (row<n && col>=0){
-            if (board.get(row).charAt(col)=='Q') return false;
-            col--;
-            row++;
-        }
-        return true;
+        solve(0,board,n);
+        return res;
     }
-    public void solve(int col,List<String> board,int n){
+    private void solve(int col,char[][] board,int n){
         if (col==n){
-            res.add(new ArrayList<>(board));
+            List<String> b=new ArrayList<>();
+            for (char[] ch:board){
+                b.add(String.valueOf(ch));
+            }
+            res.add(b);
             return;
         }
         for (int row=0;row<n;row++){
             if (isSafe(row,col,board,n)){
-                char[] arr=board.get(row).toCharArray();
-                arr[col]='Q';
-                board.set(row,new String(arr));
+                board[row][col]='Q';
                 solve(col+1,board,n);
-                arr[col]='.';
-                board.set(row,new String(arr));
+                board[row][col]='.';
             }
         }
     }
-    public List<List<String>> solveNQueens(int n) {
-        List<String> board=new ArrayList<>();
-        StringBuilder row=new StringBuilder();
-        for(int i=0;i<n;i++){
-            row.append('.');
+    private boolean isSafe(int row,int col,char[][] board,int n){
+        int r=row;
+        int c=col;
+        while (col>=0){
+            if (board[row][col]=='Q') return false;
+            col--;
         }
-        for (int i=0;i<n;i++){
-            board.add(row.toString());
+        row=r;
+        col=c;
+        while (row>=0 && col>=0){
+            if (board[row][col]=='Q') return false;
+            col--;
+            row--;
         }
-        solve(0,board,n);
-        return res;
+        row=r;
+        col=c;
+        while (row<n && col>=0){
+            if (board[row][col]=='Q') return false;
+            row++;
+            col--;
+        }
+        return true;
     }
 }
