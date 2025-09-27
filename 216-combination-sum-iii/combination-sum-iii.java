@@ -1,21 +1,16 @@
 class Solution {
+    List<List<Integer>> res=new ArrayList<>();
     public List<List<Integer>> combinationSum3(int k, int n) {
-        List<List<Integer>> res=new ArrayList<>();
-        backtrack(k,n,res,new ArrayList<>(),1);
+        combinations(1,k,n,new ArrayList<>());
         return res;
     }
-    public void backtrack(int k,int rem,List<List<Integer>> res,List<Integer> current,int start){
-        if (current.size()==k && rem==0){
-            res.add(new ArrayList<>(current));
-            return;
-        }
-        if (current.size() > k || rem < 0) {
-            return;
-        }
-        for (int i=start;i<=9;i++){  
-            current.add(i);
-            backtrack(k,rem-i,res,current,i+1);
-            current.remove(current.size()-1);
+    private void combinations(int start,int k,int target,List<Integer> c){
+        if (target==0 && c.size()==k) res.add(new ArrayList<>(c));
+        for (int i=start;i<=9;i++){
+            if (c.size()>k || i>target) break;
+            c.add(i);
+            combinations(i+1,k,target-i,c);
+            c.remove(c.size()-1);
         }
     }
 }
